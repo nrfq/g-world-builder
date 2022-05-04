@@ -11,9 +11,9 @@ We will likely eventually need to add fields for equipment and custom bonuses
 export const useCharacterStore = defineStore('character', {
     state: () => ({
         // string
-        name: "Nick",
+        name: "New Name",
         // int
-        level: null,
+        level: 1,
         // character origins represented by strings, first origin is index 0, second origin is index 1
         origins: [null, null],
         // chosen criticals, where index 0 is the level 2 critical and index 1 is the level 6 critical

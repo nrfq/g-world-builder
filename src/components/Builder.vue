@@ -3,7 +3,7 @@
     import { useCharacterStore } from "@/stores/characterStore"
     import { storeToRefs } from "pinia"
     const charStore = useCharacterStore()
-    const { name } = storeToRefs(charStore)
+    const { name, level } = storeToRefs(charStore)
     // const state = reactive({ tempName: name})
     // function changeName(name){
     //     console.log("changed")
@@ -14,10 +14,36 @@
 </script>
 
 <template>
-    <div>
+    <div class="builder-main">
         <h1>Builder</h1>
-        <input v-model="name">
-        <p>{{name}}</p>
-        <router-link to="/character">Character</router-link>
+        <router-link to="/character"><el-button type="primary">Character</el-button></router-link>
+        <el-tabs tab-position="top" stretch="true">
+            <el-tab-pane label="Details">
+                <div>
+                    <label for="charname">Name</label>
+                    <el-input id="charName" v-model="name" placeholder="Name" />
+                </div>
+                <div>
+                    <label for="level">Level</label>
+                    <el-input-number id="level" min=1 v-model="level" placeholder="Level" />
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="Origins">
+                <!-- origin content goes here -->
+            </el-tab-pane>
+            <el-tab-pane label="Ability Scores">
+                <!-- ability score content goes here -->
+            </el-tab-pane>
+            <el-tab-pane label="Equipment">
+                <!-- equipment conent goes here -->
+            </el-tab-pane>
+        </el-tabs>
     </div>
 </template>
+
+<style scoped>
+    .builder-main {
+        width: 70%;
+        justify-content: center;
+    }
+</style>

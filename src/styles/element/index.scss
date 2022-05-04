@@ -1,0 +1,15 @@
+// Use this for custom color variables
+// If you want to overwrite an element-plus heme color, it must go in the $--colors map
+$--colors: (
+    "primary": (
+        "base": #42b983
+    )
+);
+
+// This is what actually overwrites the variables
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+    $colors: $--colors,
+);
+
+// This imports the  rest of the styling
+@use "element-plus/theme-chalk/src/index.scss" as *;

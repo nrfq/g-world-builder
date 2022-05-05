@@ -7,6 +7,8 @@ programatically. I think it's best to keep it simple, that way we can always mak
 know that all characters will reflect the changes.
 This is similar to the technique used by pathbuilder but obviously that has a lot more to track.
 We will likely eventually need to add fields for equipment and custom bonuses
+
+I added additional fields for flavor, like alignment
 ************************************************************************************/ 
 export const useCharacterStore = defineStore('character', {
     state: () => ({
@@ -14,6 +16,14 @@ export const useCharacterStore = defineStore('character', {
         name: "New Name",
         // int
         level: 1,
+        xp: 0,
+        // Prnouns, any user inputted string
+        pronouns: "",
+        // Alignment, any user inputted string
+        alignment: "",
+        // Any user inputted string
+        // Will use the defaults from origins if randomly generated
+        description: "",
         // character origins represented by strings, first origin is index 0, second origin is index 1
         origins: [null, null],
         // chosen criticals, where index 0 is the level 2 critical and index 1 is the level 6 critical

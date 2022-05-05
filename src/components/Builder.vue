@@ -3,9 +3,11 @@
     import { useCharacterStore } from "@/stores/characterStore"
     import { storeToRefs } from "pinia"
     const charStore = useCharacterStore()
-    const { name, level } = storeToRefs(charStore)
-    const state = reactive({ name: name.value })
+    const { name, level, alignment, description, pronouns, xp } = storeToRefs(charStore)
+    const state = reactive({ name: name.value, alignment: alignment.value, level: level.value, description: description.value, pronouns: pronouns.value, xp: xp.value })
+    // const thisXP = ref(1)
 
+    // This makes the save button appear conditionally
     const showSaveButton = ref(false);
     watch(state, () => {
         if(!showSaveButton.value){
@@ -14,6 +16,13 @@
         }
     })
 
+    watch(state, () => {
+        console.log("xp changed")
+        // xp.value.replace(/[^0-9]+/g, '');
+        // state.xp = xp;
+    })
+
+    // Writes the reactive state to the pinia store
     function saveCharacter(){
         console.log(`changed to ${state.tempName}`)
         charStore.$patch(state)
@@ -29,16 +38,37 @@
             <el-button type="info" v-show="showSaveButton" @click="saveCharacter">Save</el-button>
             <el-tab-pane label="Details">
                 <el-row>
-                    <el-col :span="12">
+                    <el-col :span="8">
+                        <label for="level">Level</label>
+                        <el-input-number id="level" :min="1" v-model="state.level" placeholder="Level" />
+                    </el-col>
+                    <el-col :span="8">
+                        <label for="xp">XP</label>
+                        <el-input-number 
+                            :min="0" 
+                            v-model="state.xp" 
+                            placeholder="XP"
+                        />
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="8">
                         <label for="charname">Name</label>
                         <el-input class="temp" id="charName" v-model="state.name" placeholder="Name" />
                     </el-col>
-                    <p>Name Update Testing: {{name}}</p>
+                    <el-col :span="8">
+                        <label for="">Alignment</label>
+                        <el-input class="temp" v-model="state.alignment" placeholder="Alignment" />
+                    </el-col>
+                    <el-col :span="8">
+                        <label for="">Pronouns</label>
+                        <el-input class="temp" v-model="state.pronouns" placeholder="Pronouns" />
+                    </el-col>
                 </el-row>
-                <div>
-                    <label for="level">Level</label>
-                    <el-input-number id="level" min=1 v-model="level" placeholder="Level" />
-                </div>
+                <el-row>
+                    <el-input type="textarea" placeholder="Description"/>
+                </el-row>
+
             </el-tab-pane>
             <el-tab-pane label="Origins">
                 <!-- origin content goes here -->
@@ -61,6 +91,11 @@
     label {
         justify-self: flex-start;
     }
+
+    .el-row {
+        justify-content: center;
+    }
+
     .temp {
         width: auto;
     }

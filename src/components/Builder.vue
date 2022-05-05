@@ -1,16 +1,24 @@
 <script setup>
-    // import { reactive } from "vue" 
+    import { reactive, ref, watch } from "vue" 
     import { useCharacterStore } from "@/stores/characterStore"
     import { storeToRefs } from "pinia"
     const charStore = useCharacterStore()
     const { name, level } = storeToRefs(charStore)
-    // const state = reactive({ tempName: name})
-    // function changeName(name){
-    //     console.log("changed")
-    //     charStore.$patch({
-    //         name: name
-    //     })
-    // }
+    const state = reactive({ name: name.value })
+
+    const showSaveButton = ref(false);
+    watch(state, () => {
+        if(!showSaveButton.value){
+            console.log("called");
+            showSaveButton.value = true;
+        }
+    })
+
+    function saveCharacter(){
+        console.log(`changed to ${state.tempName}`)
+        charStore.$patch(state)
+        showSaveButton.value = false
+    }
 </script>
 
 <template>
@@ -18,11 +26,15 @@
         <h1>Builder</h1>
         <router-link to="/character"><el-button type="primary">Character</el-button></router-link>
         <el-tabs tab-position="top" stretch="true">
+            <el-button type="info" v-show="showSaveButton" @click="saveCharacter">Save</el-button>
             <el-tab-pane label="Details">
-                <div>
-                    <label for="charname">Name</label>
-                    <el-input id="charName" v-model="name" placeholder="Name" />
-                </div>
+                <el-row>
+                    <el-col :span="12">
+                        <label for="charname">Name</label>
+                        <el-input class="temp" id="charName" v-model="state.name" placeholder="Name" />
+                    </el-col>
+                    <p>Name Update Testing: {{name}}</p>
+                </el-row>
                 <div>
                     <label for="level">Level</label>
                     <el-input-number id="level" min=1 v-model="level" placeholder="Level" />
@@ -45,5 +57,11 @@
     .builder-main {
         width: 70%;
         justify-content: center;
+    }
+    label {
+        justify-self: flex-start;
+    }
+    .temp {
+        width: auto;
     }
 </style>

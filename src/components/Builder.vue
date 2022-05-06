@@ -1,38 +1,46 @@
 <script setup>
-import { reactive, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import { useCharacterStore } from "@/stores/characterStore";
-import { storeToRefs } from "pinia";
+import { useBuilderStore } from "@/stores/builderStore";
+import Details from "./builder/Details.vue";
+// import { storeToRefs } from "pinia";
 const charStore = useCharacterStore();
-const { name, level, alignment, description, pronouns, xp } = storeToRefs(charStore);
-const state = reactive({
-  name: name.value,
-  alignment: alignment.value,
-  level: level.value,
-  description: description.value,
-  pronouns: pronouns.value,
-  xp: xp.value,
-});
+const buildStore = useBuilderStore();
+
+// copies buildStore over from charStore
+// charStore is the source of truth
+buildStore.$state = charStore.$state;
+
+// const { name, level, alignment, description, pronouns, xp } = storeToRefs(charStore);
+// const state = reactive({
+//   name: name.value,
+//   alignment: alignment.value,
+//   level: level.value,
+//   description: description.value,
+//   pronouns: pronouns.value,
+//   xp: xp.value,
+// });
 
 // const tempName = ref("New Name")
 // This makes the save button appear conditionally
 const showSaveButton = ref(false);
-watch(state, () => {
+watch(buildStore.$state, () => {
   if (!showSaveButton.value) {
     console.log("called");
     showSaveButton.value = true;
   }
 });
 
-watch(state, () => {
-  console.log("xp changed");
-  // xp.value.replace(/[^0-9]+/g, '');
-  // state.xp = xp;
-});
+// watch(state, () => {
+//   console.log("xp changed");
+//   // xp.value.replace(/[^0-9]+/g, '');
+//   // state.xp = xp;
+// });
 
-// Writes the reactive state to the pinia store
+// // Writes the reactive state to the pinia store
 function saveCharacter() {
-  console.log(`changed to ${state.tempName}`);
-  charStore.$patch(state);
+  // console.log(`changed to ${state.tempName}`);
+  charStore.$patch(buildStore.$state);
   showSaveButton.value = false;
 }
 </script>
@@ -60,52 +68,8 @@ function saveCharacter() {
     
     <el-tabs tab-position="top" stretch="true">
       <el-tab-pane label="Details">
-        <p>Name Update: {{name}}</p>
-        <el-row justify="center">
-          <el-col :span="8">
-            <label for="level">Level</label>
-            <el-input-number
-              id="level"
-              :min="1"
-              v-model="state.level"
-              placeholder="Level"
-            />
-          </el-col>
-          <el-col :span="8">
-            <label for="xp">XP</label>
-            <el-input-number :min="0" v-model="state.xp" placeholder="XP" />
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="8">
-            <label for="charname">Name</label>
-            <el-input
-              class="temp"
-              id="charName"
-              v-model="state.name"
-              placeholder="Name"
-            />
-          </el-col>
-          <el-col :span="8">
-            <label for="">Alignment</label>
-            <el-input
-              class="temp"
-              v-model="state.alignment"
-              placeholder="Alignment"
-            />
-          </el-col>
-          <el-col :span="8">
-            <label for="">Pronouns</label>
-            <el-input
-              class="temp"
-              v-model="state.pronouns"
-              placeholder="Pronouns"
-            />
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-input type="textarea" placeholder="Description" />
-        </el-row>
+        <p>Name Update: {{charStore.name}}</p>
+        <Details/>
       </el-tab-pane>
       <el-tab-pane label="Origins">
         <!-- origin content goes here -->
@@ -127,9 +91,5 @@ function saveCharacter() {
 }
 label {
   justify-self: flex-start;
-}
-
-.temp {
-  width: auto;
 }
 </style>

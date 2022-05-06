@@ -3,23 +3,14 @@ import { ref, watch } from "vue";
 import { useCharacterStore } from "@/stores/characterStore";
 import { useBuilderStore } from "@/stores/builderStore";
 import Details from "./builder/Details.vue";
+import Origins from "./builder/Origins.vue";
 // import { storeToRefs } from "pinia";
 const charStore = useCharacterStore();
 const buildStore = useBuilderStore();
 
-// copies buildStore over from charStore
+// copies charStore into buildStore
 // charStore is the source of truth
 buildStore.$state = charStore.$state;
-
-// const { name, level, alignment, description, pronouns, xp } = storeToRefs(charStore);
-// const state = reactive({
-//   name: name.value,
-//   alignment: alignment.value,
-//   level: level.value,
-//   description: description.value,
-//   pronouns: pronouns.value,
-//   xp: xp.value,
-// });
 
 // const tempName = ref("New Name")
 // This makes the save button appear conditionally
@@ -30,12 +21,6 @@ watch(buildStore.$state, () => {
     showSaveButton.value = true;
   }
 });
-
-// watch(state, () => {
-//   console.log("xp changed");
-//   // xp.value.replace(/[^0-9]+/g, '');
-//   // state.xp = xp;
-// });
 
 // // Writes the reactive state to the pinia store
 function saveCharacter() {
@@ -72,7 +57,7 @@ function saveCharacter() {
         <Details/>
       </el-tab-pane>
       <el-tab-pane label="Origins">
-        <!-- origin content goes here -->
+        <Origins/>
       </el-tab-pane>
       <el-tab-pane label="Ability Scores">
         <!-- ability score content goes here -->

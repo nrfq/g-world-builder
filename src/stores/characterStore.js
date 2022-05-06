@@ -25,7 +25,7 @@ export const useCharacterStore = defineStore('character', {
         // Will use the defaults from origins if randomly generated
         description: "",
         // character origins represented by strings, first origin is index 0, second origin is index 1
-        origins: [null, null],
+        origins: ["Android", "Cockroach"],
         // chosen criticals, where index 0 is the level 2 critical and index 1 is the level 6 critical
         // each element is an int of 0 or 1, which represents the critical from their first or second origin respectively
         criticals: [null, null],

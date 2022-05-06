@@ -7,7 +7,9 @@ it is saved to the actual character.
 export const useBuilderStore = defineStore('builder', {
     state: () => ({
         // string
-        name: "Should not be this",
+        // the default string is a litmus test,
+        // if it appears anywhere in the app there's a bug
+        name: "Should never see this",
         // int
         level: 1,
         xp: 0,

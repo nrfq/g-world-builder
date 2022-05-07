@@ -9,7 +9,7 @@
 <template>
     <el-row>
         <el-col :span="12">
-            <h2>Origin 1</h2>
+            <h2>Primary Origin</h2>
             <el-select v-model="origins[0]">
                 <el-option
                     v-for="origin in originTable"
@@ -18,14 +18,19 @@
                     :value="origin.name"
                     :disabled="(origin.name == origins[1])"
                 />
-            </el-select>
+            </el-select> 
             <p>{{originTable[origins[0]].description}}</p>
+            <h4>Primary Traits</h4>
+            <el-table :data="originTable[origins[0]].traits" border style="width: 100%">
+                <el-table-column prop="name" label="Name"/>
+                <el-table-column prop="description" label="Effect"/>
+            </el-table>
             <p>{{criticals[0]}}</p>
             <p>{{utilities[0]}}</p>
         </el-col>
 
         <el-col :span="12">
-            <h2>Origin 2</h2>
+            <h2>Secondary Origin</h2>
             <el-select v-model="origins[1]">
                 <el-option
                     v-for="origin in originTable"
@@ -36,8 +41,27 @@
                 />
             </el-select>
             <p>{{originTable[origins[1]].description}}</p>
+            <h4>Secondary Traits</h4>
+            <el-table :data="originTable[origins[1]].traits" border style="width: 100%">
+                <el-table-column prop="name" label="Name"/>
+                <el-table-column prop="description" label="Effect"/>
+            </el-table>
             <p>{{criticals[1]}}</p>
             <p>{{utilities[1]}}</p>
         </el-col>
     </el-row>
+    <el-row>
+        <el-col>
+            <h3>Level 1</h3>
+        </el-col>
+    </el-row>
+    <el-row>
+
+    </el-row>
 </template>
+
+<style scoped>
+    h3 {
+        margin-top: 5px;
+    }
+</style>

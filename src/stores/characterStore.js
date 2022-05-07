@@ -28,9 +28,9 @@ export const useCharacterStore = defineStore('character', {
         origins: ["Android", "Cockroach"],
         // chosen criticals, where index 0 is the level 2 critical and index 1 is the level 6 critical
         // each element is an int of 0 or 1, which represents the critical from their first or second origin respectively
-        criticals: [null, null],
+        criticals: [0, 1],
         // same as criticals, but index 0 is level 3 utility and index 1 is level 7 utility
-        utilities: [null, null],
+        utilities: [0, 1],
         // base ability scores (3d6) in order: str, dex, wis, con, int, cha
         baseAbilities: [null, null, null, null, null, null],
 

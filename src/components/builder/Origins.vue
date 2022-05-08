@@ -1,6 +1,7 @@
 <script setup>
     import { useBuilderStore } from '@/stores/builderStore';
     import { storeToRefs } from 'pinia';
+    import PowerCard from "./PowerCard.vue";
     let originTable = require("../../assets/originTable.json")
     const buildStore = useBuilderStore();
     const { origins, criticals, utilities } = storeToRefs(buildStore);
@@ -56,7 +57,12 @@
         </el-col>
     </el-row>
     <el-row>
-
+        <el-col :span="12">
+            <PowerCard :power="originTable[origins[0]].novicePower" :type="origins[0]+' Novice'"/>
+        </el-col>
+        <el-col :span="12">
+            <PowerCard :power="originTable[origins[1]].novicePower" :type="origins[1]+' Novice'"/>
+        </el-col>
     </el-row>
 </template>
 
@@ -64,4 +70,5 @@
     h3 {
         margin-top: 5px;
     }
+
 </style>

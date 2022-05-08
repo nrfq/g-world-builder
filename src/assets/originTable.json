@@ -46,7 +46,7 @@
                     "2*lvl"
                 ],
                 "type": "physical damage",
-                "description": "1d10 + Intelligence modifier + two times your level physical damage, and the target is im-mobilized until the start of your next turn. If you move to a square that isn't adjacent to the target, the immobilization ends."
+                "description": "1d10 + Intelligence modifier + two times your level physical damage, and the target is immobilized until the start of your next turn. If you move to a square that isn't adjacent to the target, the immobilization ends."
             },
             "effect": null,
             "miss": null,
@@ -428,7 +428,7 @@
         ],
         "novicePower": {
             "name": "Vitality Transfer",
-            "description": "First, do no harm-not to anyone you like, anyway.",
+            "description": "First, do no harm - not to anyone you like, anyway.",
             "frequency": "Encounter",
             "sources": [
                 "Psi"

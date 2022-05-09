@@ -35,6 +35,7 @@ function saveCharacter() {
     <h1>Builder</h1>
     <el-row justify="start">
         <el-col :span="8">
+          <el-affix :offset="20">
             <el-button 
                 class="save-button" 
                 type="info" 
@@ -43,6 +44,7 @@ function saveCharacter() {
             >
                 Save
             </el-button>
+          </el-affix>
         </el-col>
         <el-col :span="8">
           <router-link to="/character"

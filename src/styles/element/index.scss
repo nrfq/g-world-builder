@@ -9,6 +9,7 @@ $--colors: (
     )
 );
 
+
 // This is what actually overwrites the variables
 @forward 'element-plus/theme-chalk/src/common/var.scss' with (
     $colors: $--colors,
@@ -16,3 +17,7 @@ $--colors: (
 
 // This imports the  rest of the styling
 @use "element-plus/theme-chalk/src/index.scss" as *;
+
+html{
+    overflow-y: scroll;
+}

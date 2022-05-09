@@ -5,10 +5,12 @@
     let originTable = require("../../assets/originTable.json")
     const buildStore = useBuilderStore();
     const { origins, criticals, utilities } = storeToRefs(buildStore);
+
+    const gutter = 20;
 </script>
 
 <template>
-    <el-row>
+    <el-row :gutter="gutter">
         <el-col :span="12">
             <h2>Primary Origin</h2>
             <el-select v-model="origins[0]">
@@ -26,7 +28,6 @@
                 <el-table-column prop="name" label="Name"/>
                 <el-table-column prop="description" label="Effect"/>
             </el-table>
-            <p>{{criticals[0]}}</p>
             <p>{{utilities[0]}}</p>
         </el-col>
 
@@ -47,7 +48,6 @@
                 <el-table-column prop="name" label="Name"/>
                 <el-table-column prop="description" label="Effect"/>
             </el-table>
-            <p>{{criticals[1]}}</p>
             <p>{{utilities[1]}}</p>
         </el-col>
     </el-row>
@@ -56,12 +56,34 @@
             <h3>Level 1</h3>
         </el-col>
     </el-row>
-    <el-row>
+    <el-row :gutter="gutter">
         <el-col :span="12">
             <PowerCard :power="originTable[origins[0]].novicePower" :type="origins[0]+' Novice'"/>
         </el-col>
         <el-col :span="12">
             <PowerCard :power="originTable[origins[1]].novicePower" :type="origins[1]+' Novice'"/>
+        </el-col>
+    </el-row>
+    <el-row>
+        <el-col>
+            <h3>Level 2</h3>
+        </el-col>
+    </el-row>
+    <el-row>
+        <el-col>
+            <el-select v-model="criticals[0]">
+                <el-option
+                    :label="origins[0] + ' Critical'"
+                    :value="0"
+                />
+                <el-option 
+                    :label="origins[1] + ' Critical'"
+                    :value="1"
+                />
+            </el-select>
+            <el-card>
+                {{originTable[origins[criticals[0]]].critical}}
+            </el-card>
         </el-col>
     </el-row>
 </template>

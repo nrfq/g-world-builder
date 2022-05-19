@@ -8,8 +8,8 @@
     <el-card>
         <template #header>
                 <div class="card-header">
-                <span class="power-name">{{power.name}}</span>
-                <span>{{type}} Power</span>
+                    <span class="power-name">{{power.name}}</span>
+                    <span v-if="type">{{type}} Power</span>
                 </div>
         </template>
         <div class="power-description">
@@ -17,39 +17,39 @@
         </div>
         <div class="power-info-container">
             <div>
-                <span>{{power.frequency}}</span>
-                <span><img class="sources-symbol" :src="sourceSymbol"/></span>
+                <span v-if="power.frequency">{{power.frequency}}</span>
+                <span v-if="power.sources"><img class="sources-symbol" :src="sourceSymbol"/></span>
                 <span v-for="(source, index) in power.sources" :key="source">
                     {{source}}
                     <span v-if="index != power.sources.length - 1">, </span>
                 </span>
             </div>
-            <div>
-                <span v-if="power.action">Action Type: {{power.action}}</span>
+            <div v-if="power.action">
+                <span >Action Type: {{power.action}}</span>
             </div>
-            <div>
-                <span v-if="power.range">Range: {{power.range}}</span>
+            <div v-if="power.range">
+                <span>Range: {{power.range}}</span>
             </div>
-            <div>
-                <span v-if="power.trigger">Trigger: {{power.trigger}}</span>
+            <div v-if="power.trigger">
+                <span >Trigger: {{power.trigger}}</span>
             </div>
-            <div>
-                <span v-if="power.target">Target: {{power.target}}</span>
+            <div v-if="power.target">
+                <span >Target: {{power.target}}</span>
             </div>
-            <div>
-                <span v-if="power.attack">Attack: {{power.attack.description}}</span>
+            <div v-if="power.attack">
+                <span >Attack: {{power.attack.description}}</span>
             </div>
-            <div>
-                <span v-if="power.hit">Hit: {{power.hit.description}}</span>
+            <div v-if="power.hit">
+                <span >Hit: {{power.hit.description}}</span>
             </div>
-            <div>
-                <span v-if="power.effect">Effect: {{power.effect}}</span>
+            <div v-if="power.effect">
+                <span >Effect: {{power.effect}}</span>
             </div>
-            <div>
-                <span v-if="power.miss">Miss: {{power.miss}}</span>
+            <div v-if="power.miss">
+                <span >Miss: {{power.miss}}</span>
             </div>
-            <div>
-                <span v-if="power.special">Special: {{power.special}}</span>
+            <div v-if="power.special">
+                <span >Special: {{power.special}}</span>
             </div>
         </div>
     </el-card>

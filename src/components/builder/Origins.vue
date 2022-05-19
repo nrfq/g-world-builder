@@ -1,4 +1,6 @@
 <script setup>
+import { reactive } from 'vue'
+
     import { useBuilderStore } from '@/stores/builderStore';
     import { storeToRefs } from 'pinia';
     import LevelOne from './levels/LevelOne.vue';
@@ -12,6 +14,9 @@
     const buildStore = useBuilderStore();
     const { origins } = storeToRefs(buildStore);
     const gutter = 20;
+
+    const state = reactive({ activeLevels: [] })
+
 </script>
 
 <template>
@@ -53,26 +58,36 @@
             </el-table>
         </el-col>
     </el-row>
-    <el-collapse v-model="activeLevels" class="level-holder">
-        <el-collapse-item title="Level 1">
+    <el-button @click="() => {
+        if(state.activeLevels.length != 0){
+            state.activeLevels = []
+        }
+        else{
+            state.activeLevels = Array.from(new Array(10), (x, i) => `${i+1}`)
+        }}">
+        <span v-if="state.activeLevels.length != 0">Collapse All</span>
+        <span v-else>Expand All</span>
+    </el-button>
+    <el-collapse v-model="state.activeLevels" class="level-holder">
+        <el-collapse-item title="Level 1" name="1">
             <LevelOne />
         </el-collapse-item>
-        <el-collapse-item title="Level 2">
+        <el-collapse-item title="Level 2" name="2">
             <LevelTwo />
         </el-collapse-item>
-        <el-collapse-item title="Level 3">
+        <el-collapse-item title="Level 3" name="3">
             <LevelThree />
         </el-collapse-item>
-        <el-collapse-item title="Level 4">
+        <el-collapse-item title="Level 4" name="4">
             <LevelFour/>
         </el-collapse-item>
-        <el-collapse-item title="Level 5">
+        <el-collapse-item title="Level 5" name="5">
             <LevelFive />
         </el-collapse-item>
-        <el-collapse-item title="Level 6">
+        <el-collapse-item title="Level 6" name="6">
             <LevelSix />
         </el-collapse-item>
-        <el-collapse-item title="Level 7">
+        <el-collapse-item title="Level 7" name="7">
             <LevelSeven />
         </el-collapse-item>
     </el-collapse>

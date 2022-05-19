@@ -9,10 +9,16 @@ $--colors: (
     )
 );
 
+$--collapse: (
+    'header-font-size': 1rem,
+    'content-font-size': 1rem
+);
+
 
 // This is what actually overwrites the variables
 @forward 'element-plus/theme-chalk/src/common/var.scss' with (
     $colors: $--colors,
+    $collapse: $--collapse,
 );
 
 // This imports the  rest of the styling

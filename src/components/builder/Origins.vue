@@ -4,7 +4,8 @@
     import LevelOne from './levels/LevelOne.vue';
     import LevelTwo from './levels/LevelTwo.vue';
     import LevelThree from './levels/LevelThree.vue';
-import LevelFour from './levels/LevelFour.vue';
+    import LevelFour from './levels/LevelFour.vue';
+    import LevelFive from './levels/LevelFive.vue';
     let originTable = require("@/assets/originTable.json")
     const buildStore = useBuilderStore();
     const { origins } = storeToRefs(buildStore);
@@ -63,12 +64,10 @@ import LevelFour from './levels/LevelFour.vue';
         <el-collapse-item title="Level 4">
             <LevelFour/>
         </el-collapse-item>
+        <el-collapse-item title="Level 5">
+            <LevelFive />
+        </el-collapse-item>
     </el-collapse>
-    <el-row justify="center">
-        <el-col :span="12">
-
-        </el-col>
-    </el-row>
 </template>
 
 <style scoped>

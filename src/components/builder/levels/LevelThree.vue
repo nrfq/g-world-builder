@@ -7,7 +7,7 @@
     const { origins, utilities } = storeToRefs(buildStore);
 </script>
 <template>
-<el-row justify="center">
+    <el-row justify="center">
         <el-col :span="12">
             <el-select v-model="utilities[0]">
                 <el-option

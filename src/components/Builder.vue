@@ -53,7 +53,7 @@ function saveCharacter() {
         </el-col>
     </el-row>
     
-    <el-tabs tab-position="top" stretch="true">
+    <el-tabs tab-position="top" :stretch="true">
       <el-tab-pane label="Details">
         <p>Name Update: {{charStore.name}}</p>
         <Details/>

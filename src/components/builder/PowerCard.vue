@@ -8,11 +8,11 @@
     <el-card>
         <template #header>
                 <div class="card-header">
-                    <span class="power-name">{{power.name}}</span>
+                    <span v-if="power.name" class="power-name">{{power.name}}</span>
                     <span v-if="type">{{type}} Power</span>
                 </div>
         </template>
-        <div class="power-description">
+        <div v-if="power.description" class="power-description">
             <span>{{power.description}}</span>
         </div>
         <div class="power-info-container">

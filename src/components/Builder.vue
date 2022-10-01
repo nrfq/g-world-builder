@@ -3,6 +3,7 @@ import { ref, watch } from "vue";
 import { useCharacterStore } from "@/stores/characterStore";
 import { useBuilderStore } from "@/stores/builderStore";
 import Details from "./builder/Details.vue";
+import OriginsNew from "./builder/OriginNew.vue";
 import Origins from "./builder/Origins.vue";
 // import { storeToRefs } from "pinia";
 const charStore = useCharacterStore();

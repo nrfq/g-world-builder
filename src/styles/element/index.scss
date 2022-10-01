@@ -1,29 +1,72 @@
 // Use this for custom color variables
 // If you want to overwrite an element-plus heme color, it must go in the $--colors map
+
+$rad-green: #42b983;
+$rad-magenta: #9f3059;
+$omega-green: #c0d636;
+$alpha-purple: #6c2769;
+
+$dot-width: 0.3rem !default;
+$border-width: 2px;
+
+
 $--colors: (
-    "primary": (
-        "base": #42b983
-    ),
-    "info": (
-        "base": #9f3059
-    )
+	"primary": ("base": $omega-green),
+	"info": ("base": $alpha-purple )
 );
 
 $--collapse: (
-    'header-font-size': 1rem,
-    'content-font-size': 1rem
+	'header-font-size': 1rem,
+	'content-font-size': 1rem
 );
 
 
 // This is what actually overwrites the variables
-@forward 'element-plus/theme-chalk/src/common/var.scss' with (
-    $colors: $--colors,
-    $collapse: $--collapse,
+@forward 'element-plus/theme-chalk/src/common/var.scss' with ($colors: $--colors,
+	$collapse: $--collapse,
 );
 
 // This imports the  rest of the styling
 @use "element-plus/theme-chalk/src/index.scss" as *;
 
-html{
-    overflow-y: scroll;
+html {
+	overflow-y: scroll;
+	font-size: 12px;
+}
+
+textarea {
+	resize: none;
+}
+
+.details-box {
+	background-color: $omega-green;
+}
+
+.text-field {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	background-color: none;
+	box-sizing: border-box;
+	padding: $dot-width;
+	width: 100%;
+}
+
+.text-input {
+	font-size: 1rem;
+	width: 100%;
+	padding: $dot-width;
+	box-sizing: border-box; 
+	border-width: $dot-width;
+	border-style: hidden hidden dotted hidden;
+	border-color: $alpha-purple;
+	&:focus{
+		outline: $alpha-purple solid $border-width;
+	}
+}
+
+.field-label {
+	font-size: 1rem;
+	color: $alpha-purple;
+	padding-left: $dot-width;
 }

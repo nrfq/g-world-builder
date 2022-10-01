@@ -1,58 +1,36 @@
 <script setup>
-    import { useBuilderStore } from "@/stores/builderStore";
-    const buildStore = useBuilderStore();
+import TextField from "@/components/fields/TextField.vue";
+import NumberField from "../fields/NumberField.vue";
+import TextAreaField from "../fields/TextAreaField.vue";
+import { useBuilderStore } from "@/stores/builderStore";
+const buildStore = useBuilderStore();
 </script>
 
 <template>
-    <el-row justify="center">
-        <el-col :span="8">
-            <label for="level">Level</label>
-            <el-input-number
-              id="level"
-              :min="1"
-              v-model="buildStore.level"
-              placeholder="Level"
-            />
-        </el-col>
-        <el-col :span="8">
-            <label for="xp">XP</label>
-            <el-input-number :min="0" v-model="buildStore.xp" placeholder="XP" />
-        </el-col>
-    </el-row>
-    <el-row>
-        <el-col :span="8">
-            <label for="charname">Name</label>
-            <el-input
-              class="text-input"
-              id="charName"
-              v-model="buildStore.name"
-              placeholder="Name"
-            />
-        </el-col>
-        <el-col :span="8">
-            <label for="">Alignment</label>
-            <el-input
-              class="text-input"
-              v-model="buildStore.alignment"
-              placeholder="Alignment"
-            />
-        </el-col>
-        <el-col :span="8">
-            <label for="">Pronouns</label>
-            <el-input
-              class="text-input"
-              v-model="buildStore.pronouns"
-              placeholder="Pronouns"
-            />
-        </el-col>
-    </el-row>
-    <el-row>
-        <el-input type="textarea" placeholder="Description" />
-    </el-row>
+	<el-row class="details-box">
+		<el-col :span="8">
+			<el-row>
+				<el-col :span="12">
+					<TextField fieldName="name" label="Character Name"/>
+				</el-col>
+				<el-col :span="6">
+					<NumberField fieldName="level" label="Level" min="1" max="10"/>
+				</el-col>
+				<el-col :span="6">
+					<NumberField fieldName="xp" label="XP" min="0"/>
+				</el-col>
+			</el-row>
+			<el-row>
+				<el-col :span=12>
+					<TextField fieldName="alignment" label="Alignment"/>
+				</el-col>
+				<el-col :span=12>
+					<TextField fieldName="pronouns" label="Pronouns"/>
+				</el-col>
+			</el-row>
+		</el-col>
+		<el-col :span="16">
+			<TextAreaField fieldName="description" label="Description"/>
+		</el-col>
+	</el-row>
 </template>
-
-<style scoped>
-    .text-input {
-        width: auto;
-    }
-</style>
